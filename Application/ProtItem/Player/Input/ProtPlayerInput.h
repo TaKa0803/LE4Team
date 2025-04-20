@@ -1,0 +1,49 @@
+#pragma once
+#include"Input/Input.h"
+
+//プレイヤー入力をまとめるクラス
+class ProtPlayerInput
+{
+public://**パブリック変数**//
+
+	enum Type {
+		Roll,
+		Count
+	};
+
+
+public:
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	ProtPlayerInput();
+	~ProtPlayerInput()=default;
+
+	/// <summary>
+	/// 入力移動取得
+	/// </summary>
+	/// <returns>入力方向</returns>
+	Vector3 GetMoveInput();
+
+	/// <summary>
+	/// 入力チェック
+	/// </summary>
+	/// <param name="type"></param>
+	/// <returns></returns>
+	bool GetInput(Type type);
+
+private://**プライベート関数**//
+
+	/// <summary>
+	/// 回避入力関数
+	/// </summary>
+	bool RollInput();
+
+private://**プライベート変数**//
+
+	//入力クラス
+	Input* input_=nullptr;
+
+
+};
