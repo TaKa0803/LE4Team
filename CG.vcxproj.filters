@@ -382,6 +382,11 @@
     <ClCompile Include="Application\ProtItem\Player\behavior\Move\ProtPlayerMove.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\Roll\ProtPlayerRoll.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\IProtBehavior.cpp" />
+    <ClCompile Include="Application\ProtItem\Boss\Boss.cpp" />
+    <ClCompile Include="Application\ProtItem\Boss\Behavior\IBossBehavior.cpp" />
+    <ClCompile Include="Application\ProtItem\Boss\Behavior\Idle\BossIdle.cpp" />
+    <ClCompile Include="Application\ProtItem\Boss\Behavior\IBossAttack\IBossAttack.cpp" />
+    <ClCompile Include="Application\ProtItem\Boss\Behavior\AreaAttack\BossAreaAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -699,6 +704,11 @@
     <ClInclude Include="Application\ProtItem\Player\behavior\IProtBehavior.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Move\ProtPlayerMove.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Roll\ProtPlayerRoll.h" />
+    <ClInclude Include="Application\ProtItem\Boss\Boss.h" />
+    <ClInclude Include="Application\ProtItem\Boss\Behavior\IBossBehavior.h" />
+    <ClInclude Include="Application\ProtItem\Boss\Behavior\Idle\BossIdle.h" />
+    <ClInclude Include="Application\ProtItem\Boss\Behavior\IBossAttack\IBossAttack.h" />
+    <ClInclude Include="Application\ProtItem\Boss\Behavior\AreaAttack\BossAreaAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
