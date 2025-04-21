@@ -39,7 +39,4 @@ private:
 	//個数
 	int numbers_ = 3;
 
-	//間隔
-	float interval_ = 1.0f;
-
 };

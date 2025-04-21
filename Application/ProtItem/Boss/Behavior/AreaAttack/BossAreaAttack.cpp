@@ -1,4 +1,5 @@
 #include "BossAreaAttack.h"
+#include"ProtItem/Boss/Boss.h"
 
 BossAreaAttack::BossAreaAttack()
 {
@@ -28,12 +29,19 @@ void BossAreaAttack::UpdateBehavior0()
 
 void BossAreaAttack::UpdateBehavior1()
 {	
+	//経過時間で終了
+	if (sec_ >= attackTime_) {
+		//通常状態に移行
+		boss_->behaviorRequest_ = Boss::Behavior::Idle;
+	}
+
 	//タイム以上で発生
 	if (sec_ >= (attackTime_ / numbers_) * currentNum_) {
 		//カウント増加
 		currentNum_++;
 
-
+		//生成
+		//boss_->
 	}
 }
 

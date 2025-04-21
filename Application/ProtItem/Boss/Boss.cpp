@@ -15,6 +15,7 @@ Boss::Boss()
 	behaviors_.resize((size_t)Behavior::Count);
 	behaviors_[(size_t)Behavior::Idle] = std::make_unique<BossIdle>();
 	behaviors_[(size_t)Behavior::Attack1] = std::make_unique<BossAreaAttack>();
+	behaviors_[(size_t)Behavior::Attack2] = std::make_unique<BossAreaAttack>();
 
 
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");

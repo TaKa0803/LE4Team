@@ -64,8 +64,7 @@ public://**セッター
 public://**状態**//
 
 	//状態
-	enum class Behavior
-	{
+	enum class Behavior{
 		Move,	//移動
 		Roll,	//回避
 		Count	//状態の数
