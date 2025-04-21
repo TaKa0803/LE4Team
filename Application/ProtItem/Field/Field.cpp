@@ -6,13 +6,14 @@
  */
 
 #include "Field.h"
+#include"ImGuiManager/ImGuiManager.h"
 
-void Field::Initialize(Model* model) {
+void Field::Initialize() {
 	//Input
 	input_ = Input::GetInstance();
 
-	assert(model != nullptr);
-	model_ = model;
+	//インスタンシングモデルマネージャ生成
+	IMM_ = InstancingModelManager::GetInstance();
 
 	worldTransform_.Initialize();
 
@@ -24,18 +25,7 @@ void Field::Initialize(Model* model) {
 	}
 
 	//Test
-	block_.model.Initialize(model_->modelData_, model_->modelData_.textureIndex);
-	block_.model.SetDirectionalLightFlag(true, 3);
-
-	block_.world.Initialize();
-
-	block_.world.translate_ = { 0.0f,blockSize_ * 2.0f + block_.world.scale_.y,0.0f };
-	block_.world.rotate_ = { 0.0f,0.0f,0.0f };
-	block_.world.scale_ = { 0.5f,0.5f,0.5f };
-
-	block_.color = { 1.0f,0.0f,0.0f,1.0f };
-
-	block_.massLocation = { -1,-1 };
+	
 }
 
 void Field::Update() {
@@ -97,12 +87,12 @@ void Field::Update() {
 	block_.world.UpdateMatrix();
 }
 
-void Field::Draw(const ViewProjection& viewProjection) {
+void Field::Draw() {
 	for (Block& block : blocks_) {
-		block.model.Draw(block.world, viewProjection, block.color);
+		IMM_->SetData(tag_, block.world, block.color);
 	}
 
-	block_.model.Draw(block_.world, viewProjection, block_.color);
+	//block_.model.Draw(block_.world, viewProjection, block_.color);
 }
 
 void Field::Finalize() {
@@ -113,8 +103,8 @@ void Field::CreateBlocks(const int x, const int z) {
 	Block block;
 
 	//モデルの設定
-	block.model.Initialize(model_->modelData_, model_->modelData_.textureIndex);
-	block.model.SetDirectionalLightFlag(true, 3);
+	//block.model.Initialize(model_->modelData_, model_->modelData_.textureIndex);
+	//block.model.SetDirectionalLightFlag(true, 3);
 
 	block.world.Initialize();
 

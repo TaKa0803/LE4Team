@@ -2,7 +2,7 @@
 #include "IScene/IScene.h"
 #include"ProtItem/Player/ProtPlayer.h"
 #include"ProtItem/Boss/Boss.h"
-#include"Game/Plane/Plane.h"
+#include"ProtItem/Field/Field.h"
 
 class ProtScene : public IScene {
 
@@ -38,5 +38,5 @@ private:
 	std::unique_ptr<Boss>boss_ = nullptr;
 
 	//地面
-	std::unique_ptr<Plane>plane_ = nullptr;
+	std::unique_ptr<Field>field_ = nullptr;
 };

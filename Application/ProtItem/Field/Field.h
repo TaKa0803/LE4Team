@@ -13,8 +13,10 @@
 #include <list>
 #include <cassert>
 
+
+#include"Input/Input.h"
+
 struct Block {
-	Model model;
 	EulerWorldTransform world;
 	Vector4 color;
 	Vector2 massLocation;
@@ -22,9 +24,10 @@ struct Block {
 
 class Field {
 public:
-	void Initialize(Model* model);
+
+	void Initialize();
 	void Update();
-	void Draw(const ViewProjection& viewProjection);
+	void Draw();
 	void Finalize();
 
 private:
@@ -51,9 +54,10 @@ private:
 
 private:
 	EulerWorldTransform worldTransform_;
-	Model* model_ = nullptr;
 
 	Input* input_ = nullptr;
+
+	std::string tag_ = "Block";
 
 	InstancingModelManager* IMM_ = nullptr;
 

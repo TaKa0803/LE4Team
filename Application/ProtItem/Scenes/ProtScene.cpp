@@ -9,7 +9,7 @@ ProtScene::ProtScene()
 	boss_ = std::make_unique<Boss>();
 
 	//地面クラスの生成
-	plane_ = std::make_unique<Plane>();
+	field_ = std::make_unique<Field>();
 }
 
 void ProtScene::Initialize()
@@ -18,6 +18,7 @@ void ProtScene::Initialize()
 	//ボスの初期化
 	boss_->Init();
 
+	field_->Initialize();
 }
 
 void ProtScene::Update()
@@ -27,12 +28,15 @@ void ProtScene::Update()
 
 	//ボスの更新
 	boss_->Update();
+
+	//地面の更新
+	field_->Update();
 }
 
 void ProtScene::Draw()
 {
 	//地面の描画
-	plane_->Draw();
+	field_->Draw();
 
 	//ボスの描画
 	boss_->Draw();
