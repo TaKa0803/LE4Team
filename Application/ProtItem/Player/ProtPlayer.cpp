@@ -9,6 +9,8 @@
 
 #include<numbers>
 
+#include"InstancingModelManager/InstancingModelManager.h"
+
 ProtPlayer::ProtPlayer()
 {
 	//オブジェクト生成

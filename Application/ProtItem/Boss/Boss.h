@@ -33,6 +33,8 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update();
 
+public://**セッター**//
+
 public://**状態
 
 	//状態

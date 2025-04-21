@@ -21,8 +21,6 @@
     "z+Plane": [ "SystemResources/normalZ+Plane", "normalZ+Plane.obj" ]
   },
   "InstancingmodelPathFile": {
-    "PlayerM3": [ "Object", "player.gltf", 1000 ],
-    "PlayerM4": [ "Object", "player.gltf", 1000 ],
 
     "FallEnemy": [ "Object", "player.gltf", 100000 ],
 

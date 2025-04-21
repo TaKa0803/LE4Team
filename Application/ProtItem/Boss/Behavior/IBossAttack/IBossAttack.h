@@ -26,20 +26,20 @@ public://**状態**//
 	/// <summary>
 	/// 各状態の初期化関数
 	/// </summary>
+	virtual void InitBehavior0() = 0;
 	virtual void InitBehavior1() = 0;
 	virtual void InitBehavior2() = 0;
 	virtual void InitBehavior3() = 0;
 	virtual void InitBehavior4() = 0;
-	virtual void InitBehavior5() = 0;
 
 	/// <summary>
 	/// 各状態の更新関数
 	/// </summary>
+	virtual void UpdateBehavior0() = 0;
 	virtual void UpdateBehavior1() = 0;
 	virtual void UpdateBehavior2() = 0;
 	virtual void UpdateBehavior3() = 0;
 	virtual void UpdateBehavior4() = 0;
-	virtual void UpdateBehavior5() = 0;
 
 
 	//関数テーブル
