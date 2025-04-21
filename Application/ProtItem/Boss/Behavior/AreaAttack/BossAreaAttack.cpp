@@ -1,41 +1,32 @@
 #include "BossAreaAttack.h"
 
+BossAreaAttack::BossAreaAttack()
+{
+
+}
+
 void BossAreaAttack::InitBehavior1()
 {
+	//予備動作初期化
 }
 
 void BossAreaAttack::InitBehavior2()
 {
+	//実際の行動初期化
 }
 
-void BossAreaAttack::InitBehavior3()
-{
-}
 
-void BossAreaAttack::InitBehavior4()
-{
-}
-
-void BossAreaAttack::InitBehavior5()
-{
-}
 
 void BossAreaAttack::UpdateBehavior1()
 {
+
+	if (sec_ > waitTime_) {
+
+	}
 }
 
 void BossAreaAttack::UpdateBehavior2()
 {
 }
 
-void BossAreaAttack::UpdateBehavior3()
-{
-}
 
-void BossAreaAttack::UpdateBehavior4()
-{
-}
-
-void BossAreaAttack::UpdateBehavior5()
-{
-}

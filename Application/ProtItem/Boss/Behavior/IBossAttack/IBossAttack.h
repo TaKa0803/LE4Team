@@ -8,7 +8,7 @@ class IBossAttack : public IBossBehavior {
 public://**パブリック関数**//
 
 
-	IBossAttack() = default;
+	IBossAttack();
 	virtual ~IBossAttack() = default;
 
 	/// <summary>
@@ -46,14 +46,14 @@ public://**状態**//
 	static void (IBossAttack::* behaviorInit[])();
 	static void (IBossAttack::* behaviorUpdate[])();
 
-		//状態リクエスト
+	//状態リクエスト
 	std::optional<int>countRequest_ = std::nullopt;
 
-
-private://**プライベート変数**//
+public://**ぱ変数**//
 
 	//現在の状態番号
 	int behaviorCount_ = 0;
 
-
+	//経過時間
+	float sec_ = 0;
 };

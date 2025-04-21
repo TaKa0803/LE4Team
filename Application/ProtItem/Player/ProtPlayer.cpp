@@ -17,6 +17,11 @@ ProtPlayer::ProtPlayer()
 	//入力クラス生成
 	input_ = std::make_unique<ProtPlayerInput>();
 
+	//コライダークラス生成
+	collider_ = std::make_unique<SphereCollider>();
+	//初期化
+	collider_->Initialize("プレイヤー", world_);
+
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
 
@@ -33,8 +38,7 @@ ProtPlayer::ProtPlayer()
 	gvg->SetMonitorValue("回避クールタイム", &parameters_.currentRollSec);
 	gvg->SetValue("体力", &parameters_.hp);
 
-
-
+	gvg->SetTreeData(collider_->GetDebugTree());
 
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
@@ -68,12 +72,18 @@ void ProtPlayer::Update()
 
 	//行列更新
 	GameObject::GameUpdate();
+
+	//コライダー更新
+	collider_->Update();
 }
 
 void ProtPlayer::Draw()
 {
 	//描画
 	GameObject::Draw();
+
+	//コライダー描画
+	collider_->Draw();
 }
 
 Vector3 ProtPlayer::SetBody2Input()

@@ -2,6 +2,7 @@
 #include"SingleGameObjects/GameObject.h"
 #include"ProtItem/Player/Input/ProtPlayerInput.h"
 #include"ProtItem/Player/behavior/IProtBehavior.h"
+#include"Collider/SphereCollider/SphereCollider.h"
 #include<optional>
 
 
@@ -74,5 +75,8 @@ private://**プライベート変数**//
 
 	//プレイヤー入力クラス
 	std::unique_ptr<ProtPlayerInput>input_;
+
+	//当たり判定
+	std::unique_ptr<SphereCollider>collider_;
 
 };

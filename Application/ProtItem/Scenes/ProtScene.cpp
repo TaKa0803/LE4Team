@@ -40,4 +40,7 @@ void ProtScene::Draw()
 	//プレイヤーの描画
 	player_->Draw();
 
+	//セットされたインスタンシングモデルをすべて描画
+	InstancingModelManager::GetInstance()->DrawAllModel();
+
 }
