@@ -39,6 +39,12 @@ public://**パブリック変数**//
 	//描画
 	void Draw();
 
+	/// <summary>
+	/// 座標をセットして更新
+	/// </summary>
+	/// <param name="translate">セットする座標</param>
+	void SetWorldTranslate(const Vector3& translate);
+
 public://**ゲッター**//
 
 	/// <summary>

@@ -88,6 +88,12 @@ void ProtPlayer::Draw()
 	collider_->Draw();
 }
 
+void ProtPlayer::SetWorldTranslate(const Vector3& translate)
+{
+	world_.translate_ = translate;
+	world_.UpdateMatrix();
+}
+
 Vector3 ProtPlayer::SetBody2Input()
 {
 	//入力を取得
