@@ -135,6 +135,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\ProtItem\Boss\Behavior\IBossBehavior.cpp" />
     <ClCompile Include="Application\ProtItem\Boss\Behavior\Idle\BossIdle.cpp" />
     <ClCompile Include="Application\ProtItem\Boss\Boss.cpp" />
+    <ClCompile Include="Application\ProtItem\Field\Field.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\IProtBehavior.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\Move\ProtPlayerMove.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\Roll\ProtPlayerRoll.cpp" />
@@ -415,6 +416,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\ProtItem\Boss\Behavior\IBossBehavior.h" />
     <ClInclude Include="Application\ProtItem\Boss\Behavior\Idle\BossIdle.h" />
     <ClInclude Include="Application\ProtItem\Boss\Boss.h" />
+    <ClInclude Include="Application\ProtItem\Field\Field.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\IProtBehavior.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Move\ProtPlayerMove.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Roll\ProtPlayerRoll.h" />
