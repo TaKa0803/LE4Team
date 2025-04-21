@@ -30,6 +30,9 @@ public:
 	void Draw();
 	void Finalize();
 
+	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
+	float GetMassLocationPosY(Vector3 translate, Vector3 size);
+
 private:
 	//各ブロックの生成
 	void CreateBlocks(const int x, const int z);

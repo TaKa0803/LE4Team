@@ -23,9 +23,6 @@ void Field::Initialize() {
 			CreateBlocks(i, j);
 		}
 	}
-
-	//Test
-	
 }
 
 void Field::Update() {
@@ -50,6 +47,7 @@ void Field::Update() {
 	//各ブロックの高さに応じて色を変更
 	ColorAdjustmentByHeight(highColor_, lowColor_, 0.0f, 2.0f);
 
+#ifdef _DEBUG
 	//現在のnowPos_に対応するブロックを赤くする
 	Vector2 selected = GetBlockAt(nowPos_.x, nowPos_.y);
 	for (Block& block : blocks_) {
@@ -57,6 +55,7 @@ void Field::Update() {
 			block.color = { 1.0f, 0.0f, 0.0f, 1.0f };//赤
 		}
 	}
+#endif
 
 	//ブロック間隔の更新
 	if (blockWidth_ != prevBlockWidth_) {
@@ -82,7 +81,6 @@ void Field::Update() {
 		block.world.UpdateMatrix();
 	}
 
-
 	block_.world.translate_ = { nowPos_.x,blockSize_ * 2.0f + block_.world.scale_.y, nowPos_.y };
 	block_.world.UpdateMatrix();
 }
@@ -91,20 +89,27 @@ void Field::Draw() {
 	for (Block& block : blocks_) {
 		IMM_->SetData(tag_, block.world, block.color);
 	}
-
-	//block_.model.Draw(block_.world, viewProjection, block_.color);
 }
 
 void Field::Finalize() {
 	blocks_.clear();
 }
 
+float Field::GetMassLocationPosY(Vector3 translate, Vector3 size) {
+	//現在のマスを確認する
+	Vector2 selected = GetBlockAt(translate.x, translate.z);
+	for (Block& block : blocks_) {
+		if (block.massLocation.x == selected.x && block.massLocation.y == selected.y) {
+			//現在のブロック座標Y + ブロックのサイズ(半径) + プレイヤーのサイズ(半径)を返す
+			return block.world.translate_.y + blockSize_ + size.y;
+		}
+	}
+
+	return 0.0f;
+}
+
 void Field::CreateBlocks(const int x, const int z) {
 	Block block;
-
-	//モデルの設定
-	//block.model.Initialize(model_->modelData_, model_->modelData_.textureIndex);
-	//block.model.SetDirectionalLightFlag(true, 3);
 
 	block.world.Initialize();
 
