@@ -27,7 +27,7 @@
 
     "Wall": [ "Wall", "Wall.obj", 100 ],
 
-    "Block": [ "Wall", "Wall.obj", 100 ],
+    "Block": [ "Wall", "Wall.obj", 1000000 ],
     "smallDebris": [ "Wall", "Wall.obj", 1000 ],
     "BossBullet": [ "Wall", "Wall.obj", 100 ],
     "weapon": [ "Weapon", "Weapon.obj", 64 ],

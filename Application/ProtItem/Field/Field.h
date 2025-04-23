@@ -30,6 +30,15 @@ public:
 	void Draw();
 	void Finalize();
 
+	//ステージの生成
+	void CreateStage();
+
+	//ステージの状態リセット
+	void ResetStage();
+
+	//ステージの削除
+	void DeleteStage();
+
 	//各ブロックの高さの限界値を設定
 	void SetBlockHeightLimit(float heightLimit);
 
@@ -43,10 +52,20 @@ private:
 	//座標を基にブロック位置を取得する
 	Vector2 GetBlockAt(float x, float z);
 
-	//指定ブロックを中心に周囲の高さを変える(減衰なし)
+	/// <summary>
+	/// 指定ブロックを中心に周囲の高さを変える(減衰なし)
+	/// 第一引数:中心地点
+	/// 第二引数:下がる範囲
+	/// 第三引数:中心地点の下がる量
+	/// </summary>
 	void RaiseBlocksAround(const Vector2& center, float radius, float deltaY);
 
-	//指定ブロックを中心に周囲の高さを変える(減衰あり)
+	/// <summary>
+	/// 指定ブロックを中心に周囲の高さを変える(減衰あり)
+	/// 第一引数:中心地点
+	/// 第二引数:下がる範囲
+	/// 第三引数:中心地点の下がる量
+	/// </summary>
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
 
 	//各ブロックの高さを限界値内に修正

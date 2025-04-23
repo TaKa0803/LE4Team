@@ -17,14 +17,8 @@ void Field::Initialize() {
 
 	worldTransform_.Initialize();
 
-	//各指定したブロックを生成
-	for (int i = 0; i < verticalSize_; i++) {
-		for (int j = 0; j < horizontalSize_; j++) {
-			CreateBlocks(i, j);
-		}
-	}
-
-	SetBlockHeightLimit(heightLimit_);
+	//ステージを生成
+	CreateStage();
 }
 
 void Field::Update() {
@@ -37,19 +31,24 @@ void Field::Update() {
 	ImGui::Text("TestRaiseBlocksAround:Ekey");
 	ImGui::Text("TestRaiseBlocksAroundWithAttenuation:Rkey");
 	ImGui::Text("TestSetBlockHeightLimit:Tkey");
+	ImGui::Text("ResetStage:Fkey");
 	ImGui::End();
 
-	//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
-	if (input_->TriggerKey(DIK_E)) {
+#ifdef _DEBUG
+	//Debug操作
+	if (input_->TriggerKey(DIK_E)) {//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
 		RaiseBlocksAround(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
-	if (input_->TriggerKey(DIK_R)) {
+	if (input_->TriggerKey(DIK_R)) {//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる(距離減衰付き)
 		RaiseBlocksAroundWithAttenuation(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
-	if (input_->TriggerKey(DIK_T)) {
-		//各ブロックの高さを限界値で固定
+	if (input_->TriggerKey(DIK_T)) {//各ブロックの高さを限界値で固定
 		SetBlockHeightLimit(heightLimit_);
 	}
+	if (input_->TriggerKey(DIK_F)) {//ステージ状態をリセット
+		ResetStage();
+	}
+#endif
 
 	//高さを限界値内に修正
 	FixedHeightCorrection();
@@ -102,7 +101,32 @@ void Field::Finalize() {
 	blocks_.clear();
 }
 
+void Field::CreateStage() {
+	//各指定したブロックを生成
+	for (int i = 0; i < verticalSize_; i++) {
+		for (int j = 0; j < horizontalSize_; j++) {
+			CreateBlocks(i, j);
+		}
+	}
+
+	//限界値の設定
+	SetBlockHeightLimit(heightLimit_);
+}
+
+void Field::ResetStage() {
+	for (Block& block : blocks_) {
+		//ブロックの高さを戻す
+		block.world.translate_.y = 0.0f;
+	}
+}
+
+void Field::DeleteStage() {
+	//ブロックを削除
+	blocks_.clear();
+}
+
 void Field::SetBlockHeightLimit(float heightLimit) {
+	//高さの限界値を設定
 	heightLimit_ = heightLimit;
 }
 
@@ -113,11 +137,12 @@ float Field::GetMassLocationPosY(Vector3 translate) {
 		if (block.massLocation.x == selected.x && block.massLocation.y == selected.y) {
 			//プレイヤーの位置をnowPos_に記録
 			nowPos_ = { translate.x,translate.z };
-			//現在のブロック座標Y + ブロックのサイズ(半径) + プレイヤーのサイズ(半径)を返す
+			//現在のブロック座標Y + ブロックのサイズ(半径)を返す
 			return block.world.translate_.y + blockSize_;
 		}
 	}
 
+	//何もなければそのままを返す
 	return translate.y;
 }
 
