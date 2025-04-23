@@ -1,6 +1,7 @@
 #pragma once
 #include"SingleGameObjects/GameObject.h"
 #include"ProtItem/Boss/Behavior/IBossBehavior.h"
+#include"SphereCollider/SphereCollider.h"
 #include<optional>
 
 //ボスクラス
@@ -35,6 +36,12 @@ public://**パブリック関数**//
 
 public://**セッター**//
 
+	/// <summary>
+	/// 攻撃コライダーのセット
+	/// </summary>
+	/// <param name="collider">コライダー</param>
+	void SetAttackCollider(SphereCollider* collider) { attackColliders_.push_back(collider); };
+
 public://**状態
 
 	//状態
@@ -51,4 +58,6 @@ public://**状態
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
+	//攻撃コライダー群
+	std::vector<SphereCollider*>attackColliders_;
 };

@@ -9,9 +9,6 @@ struct BossAmmoData {
 	Vector3 velocity;
 	//加速度
 	Vector3 acceraletion;
-	//円判定
-	std::unique_ptr<SphereCollider> collider;
-
 };
 
 //ボスが出す一発の弾
@@ -19,15 +16,27 @@ class BossAmmo :public InstancingGameObject{
 
 public://**パブリック関数**//
 
-	BossAmmo(const BossAmmo& ammo);
+	/// <summary>
+	/// コンストラクタと初期化
+	/// </summary>
+	/// <param name="data"></param>
+	BossAmmo(const BossAmmoData& data);
 	~BossAmmo()=default;
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
-	void Collison();
+private://**プライベート変数**//
 
-private:
+	//コライダー
+	std::unique_ptr<SphereCollider>colldier_;
+
+private://**パラメータ変数**//
+	//速度
+	Vector3 velocity_;
+	//加速度
+	Vector3 acceleration_;
 	
-	//データ
-	BossAmmoData data_;
 };
