@@ -18,22 +18,25 @@ void Field::Initialize() {
 	worldTransform_.Initialize();
 
 	//各指定したブロックを生成
-	for (int i = 0;i < verticalSize_;i++) {
-		for (int j = 0;j < horizontalSize_;j++) {
+	for (int i = 0; i < verticalSize_; i++) {
+		for (int j = 0; j < horizontalSize_; j++) {
 			CreateBlocks(i, j);
 		}
 	}
+
+	SetBlockHeightLimit(heightLimit_);
 }
 
 void Field::Update() {
 	ImGui::Begin("TestOperate");
 	ImGui::DragFloat("BlockWidth", &blockWidth_);
-	ImGui::DragFloat2("nowPos_", &nowPos_.x);
 	ImGui::Text("NowPosBlock%d:%d", GetBlockAt(nowPos_.x, nowPos_.y).x, GetBlockAt(nowPos_.x, nowPos_.y).y);
 	ImGui::DragFloat("Radius", &radius_);
 	ImGui::DragFloat("DeltaY", &deltaY_);
+	ImGui::DragFloat("HeightLimit", &heightLimit_);
 	ImGui::Text("TestRaiseBlocksAround:Ekey");
 	ImGui::Text("TestRaiseBlocksAroundWithAttenuation:Rkey");
+	ImGui::Text("TestSetBlockHeightLimit:Tkey");
 	ImGui::End();
 
 	//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
@@ -43,6 +46,13 @@ void Field::Update() {
 	if (input_->TriggerKey(DIK_R)) {
 		RaiseBlocksAroundWithAttenuation(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
+	if (input_->TriggerKey(DIK_T)) {
+		//各ブロックの高さを限界値で固定
+		SetBlockHeightLimit(heightLimit_);
+	}
+
+	//高さを限界値内に修正
+	FixedHeightCorrection();
 
 	//各ブロックの高さに応じて色を変更
 	ColorAdjustmentByHeight(highColor_, lowColor_, 0.0f, 2.0f);
@@ -80,9 +90,6 @@ void Field::Update() {
 	for (Block& block : blocks_) {
 		block.world.UpdateMatrix();
 	}
-
-	block_.world.translate_ = { nowPos_.x,blockSize_ * 2.0f + block_.world.scale_.y, nowPos_.y };
-	block_.world.UpdateMatrix();
 }
 
 void Field::Draw() {
@@ -95,17 +102,23 @@ void Field::Finalize() {
 	blocks_.clear();
 }
 
-float Field::GetMassLocationPosY(Vector3 translate, Vector3 size) {
+void Field::SetBlockHeightLimit(float heightLimit) {
+	heightLimit_ = heightLimit;
+}
+
+float Field::GetMassLocationPosY(Vector3 translate) {
 	//現在のマスを確認する
 	Vector2 selected = GetBlockAt(translate.x, translate.z);
 	for (Block& block : blocks_) {
 		if (block.massLocation.x == selected.x && block.massLocation.y == selected.y) {
+			//プレイヤーの位置をnowPos_に記録
+			nowPos_ = { translate.x,translate.z };
 			//現在のブロック座標Y + ブロックのサイズ(半径) + プレイヤーのサイズ(半径)を返す
-			return block.world.translate_.y + blockSize_ + size.y;
+			return block.world.translate_.y + blockSize_;
 		}
 	}
 
-	return 0.0f;
+	return translate.y;
 }
 
 void Field::CreateBlocks(const int x, const int z) {
@@ -214,6 +227,21 @@ void Field::RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius
 			float attenuation = 1.0f - (distance / radius);//1.0〜0.0f
 			float adjustedDeltaY = deltaY * attenuation;
 			block.world.translate_.y += adjustedDeltaY;
+		}
+	}
+}
+
+void Field::FixedHeightCorrection() {
+	for (Block& block : blocks_) {
+		if (block.world.translate_.y >= heightLimit_) {//+heightlimit_より大きければ
+			block.world.translate_.y = heightLimit_;
+		}
+		else if (block.world.translate_.y <= -heightLimit_) {//-heightlimit_より小さければ
+			block.world.translate_.y = -heightLimit_;
+
+		}
+		else {//範囲内なら
+
 		}
 	}
 }

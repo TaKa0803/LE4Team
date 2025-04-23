@@ -30,8 +30,11 @@ public:
 	void Draw();
 	void Finalize();
 
+	//各ブロックの高さの限界値を設定
+	void SetBlockHeightLimit(float heightLimit);
+
 	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
-	float GetMassLocationPosY(Vector3 translate, Vector3 size);
+	float GetMassLocationPosY(Vector3 translate);
 
 private:
 	//各ブロックの生成
@@ -45,6 +48,9 @@ private:
 
 	//指定ブロックを中心に周囲の高さを変える(減衰あり)
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
+
+	//各ブロックの高さを限界値内に修正
+	void FixedHeightCorrection();
 
 	/// <summary>
 	/// 各ブロックの高さで色を変える
@@ -68,16 +74,16 @@ private:
 	float blockSize_ = 1.0f;//ブロックのサイズ
 
 	std::list<Block> blocks_;//各種ブロック
-	static const int verticalSize_ = 10;//縦のブロック数
-	static const int horizontalSize_ = 10;//横のブロック数
-	float blockWidth_ = 2.1f;//ブロック間隔
+	static const int verticalSize_ = 20;//縦のブロック数
+	static const int horizontalSize_ = 20;//横のブロック数
+	float blockWidth_ = 2.0f;//ブロック間隔
 	float prevBlockWidth_ = blockWidth_;//前フレームのブロック間隔
 
 	//テスト用変数
-	Vector2 nowPos_ = { 0.0f,0.0f };
-	float radius_ = 1.0f;
-	float deltaY_ = -0.5f;
-	Block block_;
-	Vector4 highColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };
-	Vector4 lowColor_ = { 0.0f, 0.0f, 1.0f, 1.0f };
+	Vector2 nowPos_ = { 0.0f,0.0f };//現在の指定位置
+	float radius_ = 1.0f;//中心からの範囲
+	float deltaY_ = -0.5f;//一度に下がる値
+	float heightLimit_ = 2.5f;//ブロックの高さ限界値+heightLimit ~ -heightLimitの範囲
+	Vector4 highColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };//Yが高い時の色
+	Vector4 lowColor_ = { 0.0f, 0.0f, 1.0f, 1.0f };//Yが低い時の色
 };

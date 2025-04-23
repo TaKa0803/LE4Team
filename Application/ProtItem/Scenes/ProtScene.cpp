@@ -31,6 +31,7 @@ void ProtScene::Update()
 
 	//地面の更新
 	field_->Update();
+	player_->world_.translate_.y = field_->GetMassLocationPosY(player_->world_.translate_);
 }
 
 void ProtScene::Draw()
