@@ -2,7 +2,7 @@
 #include"InstancingGameObject/InstancingGameObject.h"
 #include"SphereCollider/SphereCollider.h"
 
-struct BossAmmoData {
+struct BossBulletData {
 	//座標
 	EulerWorldTransform world;
 	//ベクトル
@@ -20,13 +20,23 @@ public://**パブリック関数**//
 	/// コンストラクタと初期化
 	/// </summary>
 	/// <param name="data"></param>
-	BossBullet(const BossAmmoData& data);
+	BossBullet(const BossBulletData& data);
 	~BossBullet()=default;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// 当たった時の処理
+	/// </summary>
+	void OnCollision();
+
+	/// <summary>
+	/// 死亡フラグ
+	/// </summary>
+	bool GetDead() { return isDead_; };
 
 private://**プライベート変数**//
 
@@ -39,4 +49,6 @@ private://**パラメータ変数**//
 	//加速度
 	Vector3 acceleration_;
 	
+	//死亡フラグ
+	bool isDead_ = false;
 };

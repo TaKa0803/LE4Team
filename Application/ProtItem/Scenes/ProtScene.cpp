@@ -7,6 +7,8 @@ ProtScene::ProtScene()
 
 	//ボスの生成
 	boss_ = std::make_unique<Boss>();
+	//プレイヤーワールドポインタ生成
+	boss_->SetPlayerWorld(&player_->world_);
 
 	//地面クラスの生成
 	field_ = std::make_unique<Field>();
@@ -18,6 +20,7 @@ void ProtScene::Initialize()
 	//ボスの初期化
 	boss_->Init();
 
+	//フィールド初期化
 	field_->Initialize();
 }
 

@@ -1,10 +1,10 @@
 #include "IBossAttack.h"
 #include"DeltaTimer/DeltaTimer.h"
+#include"ProtItem/Boss/Boss.h"
 
 IBossAttack::IBossAttack()
 {
 	tree_.SetMonitorValue("現在の状態番号", &behaviorCount_);
-	tree_.SetMonitorValue("状態の経過時間", &sec_);
 
 }
 
@@ -12,7 +12,6 @@ void IBossAttack::Init()
 {
 	behaviorCount_ = 0;
 	countRequest_ = 0;
-	sec_ = 0;
 }
 
 
@@ -21,13 +20,10 @@ void IBossAttack::Update()
 	if (countRequest_) {
 		behaviorCount_ = countRequest_.value();
 		countRequest_ = std::nullopt;
-
+		boss_->parameters_.currentSec = 0;
 		//初期化
 		(this->*behaviorInit[behaviorCount_])();
 	}
-
-	//時間経過
-	sec_ += (float)DeltaTimer::deltaTime_;
 
 	//更新
 	(this->*behaviorUpdate[behaviorCount_])();

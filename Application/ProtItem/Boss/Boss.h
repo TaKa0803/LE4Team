@@ -40,13 +40,18 @@ public://**パブリック関数**//
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// 弾の発射処理
+	/// </summary>
+	void SpawnBullet();
+
 public://**セッター**//
 
 	/// <summary>
-	/// 攻撃コライダーのセット
+	/// プレイヤーのワールド座標取得
 	/// </summary>
-	/// <param name="collider">コライダー</param>
-	void SetAttackCollider(SphereCollider* collider) { attackColliders_.push_back(collider); };
+	/// <param name="world"></param>
+	void SetPlayerWorld(const EulerWorldTransform* world) { playerWorld_ = world; };
 
 public://**状態
 
@@ -61,9 +66,22 @@ public://**状態
 	//状態リクエスト
 	std::optional<Behavior>behaviorRequest_ = Behavior::Idle;
 
+private://**プライベート変数**//
+
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
 	//弾データ群
-	std::vector<std::unique_ptr<BossBullet>>bullets_;
+	std::list<std::unique_ptr<BossBullet>>bullets_;
+
+	//プレイヤー座標
+	const EulerWorldTransform* playerWorld_=nullptr;
+
+private://**パラメータ変数**//
+
+	//弾の初期高度
+	float bulletStartHeight_ = 10;
+
+	//落下速度
+	float fallSpeed_ = 10.0f;
 };

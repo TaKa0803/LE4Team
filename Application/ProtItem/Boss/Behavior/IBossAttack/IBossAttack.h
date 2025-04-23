@@ -53,7 +53,4 @@ public://**ぱ変数**//
 
 	//現在の状態番号
 	int behaviorCount_ = 0;
-
-	//経過時間
-	float sec_ = 0;
 };

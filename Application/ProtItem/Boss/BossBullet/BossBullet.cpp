@@ -1,7 +1,7 @@
 #include "BossBullet.h"
 #include"DeltaTimer/DeltaTimer.h"
 
-BossBullet::BossBullet(const BossAmmoData& data)
+BossBullet::BossBullet(const BossBulletData& data)
 {
 	InstancingGameObject::Initialize("sphere");
 
@@ -26,5 +26,15 @@ void BossBullet::Update()
 
 	//コライダー更新
 	colldier_->Update();
+
+	//仮の削除処理
+	if (world_.translate_.y < -10) {
+		isDead_ = true;
+	}
+}
+
+void BossBullet::OnCollision()
+{
+	isDead_ = true;
 }
 

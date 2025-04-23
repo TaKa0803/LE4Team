@@ -1,5 +1,6 @@
 #include "BossIdle.h"
-#include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"DeltaTimer/DeltaTimer.h"
+#include"ProtItem/Boss/Boss.h"
 #include<memory>
 
 BossIdle::BossIdle()
@@ -10,11 +11,14 @@ BossIdle::BossIdle()
 
 void BossIdle::Init()
 {
-
-
-
 }
 
 void BossIdle::Update()
 {
+	boss_->parameters_.currentSec += (float)DeltaTimer::deltaTime_;
+	//時間経過で次の状態に
+	if (boss_->parameters_.currentSec >= sec_) {
+		boss_->behaviorRequest_ = Boss::Attack1;
+	}
+
 }
