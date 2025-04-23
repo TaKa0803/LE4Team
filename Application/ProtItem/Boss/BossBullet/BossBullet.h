@@ -12,7 +12,7 @@ struct BossAmmoData {
 };
 
 //ボスが出す一発の弾
-class BossAmmo :public InstancingGameObject{
+class BossBullet :public InstancingGameObject{
 
 public://**パブリック関数**//
 
@@ -20,8 +20,8 @@ public://**パブリック関数**//
 	/// コンストラクタと初期化
 	/// </summary>
 	/// <param name="data"></param>
-	BossAmmo(const BossAmmoData& data);
-	~BossAmmo()=default;
+	BossBullet(const BossAmmoData& data);
+	~BossBullet()=default;
 
 	/// <summary>
 	/// 更新

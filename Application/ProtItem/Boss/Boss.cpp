@@ -49,5 +49,20 @@ void Boss::Update()
 	//行列更新
 	GameObject::GameUpdate();
 
+	//弾の更新
+	for (auto& bullet : bullets_) {
+		bullet->Update();
+	}
 
+}
+
+void Boss::Draw()
+{
+	//弾描画
+	for (auto& bullet : bullets_) {
+		bullet->Draw();
+	}
+
+	//本体描画
+	GameObject::Draw();
 }

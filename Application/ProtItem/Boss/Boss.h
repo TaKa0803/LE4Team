@@ -2,6 +2,7 @@
 #include"SingleGameObjects/GameObject.h"
 #include"ProtItem/Boss/Behavior/IBossBehavior.h"
 #include"SphereCollider/SphereCollider.h"
+#include"BossBullet/BossBullet.h"
 #include<optional>
 
 //ボスクラス
@@ -34,6 +35,11 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Draw();
+
 public://**セッター**//
 
 	/// <summary>
@@ -58,6 +64,6 @@ public://**状態
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
-	//攻撃コライダー群
-	std::vector<SphereCollider*>attackColliders_;
+	//弾データ群
+	std::vector<std::unique_ptr<BossBullet>>bullets_;
 };
