@@ -35,7 +35,7 @@ Boss::Boss()
 	bulletTree.name_ = "落下弾関係";
 	bulletTree.SetValue("生成高度", &bulletStartHeight_);
 	bulletTree.SetValue("落下速度", &fallSpeed_);
-
+	bulletTree.SetValue("半径", &radius_);
 	gvg->SetTreeData(bulletTree);
 }
 
@@ -102,6 +102,7 @@ void Boss::SpawnBullet()
 	//渡すパラメータ設定
 	BossBulletData data;
 	data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
+	data.radius = radius_;
 
 	//座標設定
 	data.world.translate_ = pos;

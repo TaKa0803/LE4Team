@@ -84,4 +84,6 @@ private://**パラメータ変数**//
 
 	//落下速度
 	float fallSpeed_ = 10.0f;
+
+	float radius_ = 1.0f;
 };

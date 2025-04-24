@@ -13,6 +13,7 @@ BossBullet::BossBullet(const BossBulletData& data)
 	//コライダー初期化
 	colldier_ = std::make_unique<SphereCollider>();
 	colldier_->Initialize("敵弾",world_);
+	colldier_->SetRadius(data.radius);
 }
 
 void BossBullet::Update()

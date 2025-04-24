@@ -9,6 +9,9 @@ struct BossBulletData {
 	Vector3 velocity;
 	//加速度
 	Vector3 acceraletion;
+
+	//サイズ
+	float radius = 1.0f;
 };
 
 //ボスが出す一発の弾
