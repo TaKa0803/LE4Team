@@ -53,6 +53,11 @@ public://**セッター**//
 	/// <param name="world"></param>
 	void SetPlayerWorld(const EulerWorldTransform* world) { playerWorld_ = world; };
 
+public://ゲッター**//
+
+	//弾データ取得
+	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bullets_; }
+
 public://**状態
 
 	//状態

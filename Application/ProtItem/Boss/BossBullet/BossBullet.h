@@ -41,6 +41,12 @@ public://**パブリック関数**//
 	/// </summary>
 	bool GetDead() { return isDead_; };
 
+	/// <summary>
+	/// 円の半径取得
+	/// </summary>
+	/// <returns></returns>
+	float GetRadius() { return colldier_->GetRadius(); };
+
 private://**プライベート変数**//
 
 	//コライダー
