@@ -32,6 +32,16 @@ void ProtScene::Update()
 	//ボスの更新
 	boss_->Update();
 
+	//ボスの弾の座標取得
+	for (auto& bullet : boss_->GetBullets()) {
+		//座標
+		Vector3 pos = bullet->world_.GetWorldTranslate();
+		//半径
+		float wide = bullet->GetRadius();
+
+		pos; wide;
+	}
+
 	//地面の更新
 	field_->Update();
 	player_->world_.translate_.y = field_->GetMassLocationPosY(player_->world_.translate_);
