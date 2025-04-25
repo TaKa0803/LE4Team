@@ -10,6 +10,9 @@ BossBullet::BossBullet(const BossBulletData& data)
 	velocity_ = data.velocity;
 	acceleration_ = data.acceraletion;
 
+
+	world_.scale_={ data.radius,data.radius ,data.radius };
+
 	//コライダー初期化
 	colldier_ = std::make_unique<SphereCollider>();
 	colldier_->Initialize("敵弾",world_);
