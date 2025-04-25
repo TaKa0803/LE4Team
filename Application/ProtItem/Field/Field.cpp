@@ -19,36 +19,48 @@ void Field::Initialize() {
 
 	//ステージを生成
 	CreateStage();
+
+	//ステージ開始演出
+	StartStage();
 }
 
 void Field::Update() {
 	ImGui::Begin("TestOperate");
 	ImGui::DragFloat("BlockWidth", &blockWidth_);
-	ImGui::Text("NowPosBlock%d:%d", GetBlockAt(nowPos_.x, nowPos_.y).x, GetBlockAt(nowPos_.x, nowPos_.y).y);
 	ImGui::DragFloat("Radius", &radius_);
 	ImGui::DragFloat("DeltaY", &deltaY_);
 	ImGui::DragFloat("HeightLimit", &heightLimit_);
-	ImGui::Text("TestRaiseBlocksAround:Ekey");
-	ImGui::Text("TestRaiseBlocksAroundWithAttenuation:Rkey");
-	ImGui::Text("TestSetBlockHeightLimit:Tkey");
-	ImGui::Text("ResetStage:Fkey");
-	ImGui::End();
-
-#ifdef _DEBUG
-	//Debug操作
-	if (input_->TriggerKey(DIK_E)) {//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
+	if (ImGui::Button("TestRaiseBlocksAround")) {
+		//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
 		RaiseBlocksAround(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
-	if (input_->TriggerKey(DIK_R)) {//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる(距離減衰付き)
+	if (ImGui::Button("TestRaiseBlocksAroundWithAttenuation")) {
+		//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる(距離減衰付き)
 		RaiseBlocksAroundWithAttenuation(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
-	if (input_->TriggerKey(DIK_T)) {//各ブロックの高さを限界値で固定
+	if (ImGui::Button("TestSetBlockHeightLimit")) {
+		//各ブロックの高さを限界値で固定
 		SetBlockHeightLimit(heightLimit_);
 	}
-	if (input_->TriggerKey(DIK_F)) {//ステージ状態をリセット
+	if (ImGui::Button("StartStage")) {
+		//ステージ開始演出
+		Finalize();
+
+		CreateStage();
+
+		StartStage();
+	}
+	if (ImGui::Button("ResetStage")) {
+		//ステージ状態をリセット
 		ResetStage();
 	}
-#endif
+	ImGui::End();
+
+	//ステージ開始/リセット演出
+	if (isAnimationReset_ == true) {
+		deltaTime_ += deltaPlusTime_;
+		PlayStageIntroAnimation(deltaTime_);
+	}
 
 	//高さを限界値内に修正
 	FixedHeightCorrection();
@@ -101,23 +113,18 @@ void Field::Finalize() {
 	blocks_.clear();
 }
 
-void Field::CreateStage() {
-	//各指定したブロックを生成
-	for (int i = 0; i < verticalSize_; i++) {
-		for (int j = 0; j < horizontalSize_; j++) {
-			CreateBlocks(i, j);
-		}
-	}
-
-	//限界値の設定
-	SetBlockHeightLimit(heightLimit_);
+void Field::StartStage() {
+	isAnimationReset_ = true;
+	deltaTime_ = 0.0f;
+	elapsedTime_ = 0.0f;
+	deltaPlusTime_ = 1.0f / 2400.0f;
 }
 
 void Field::ResetStage() {
-	for (Block& block : blocks_) {
-		//ブロックの高さを戻す
-		block.world.translate_.y = 0.0f;
-	}
+	isAnimationReset_ = true;
+	deltaTime_ = 0.0f;
+	elapsedTime_ = 0.0f;
+	deltaPlusTime_ = 1.0f / 600.0f;
 }
 
 void Field::DeleteStage() {
@@ -163,7 +170,7 @@ void Field::CreateBlocks(const int x, const int z) {
 	};
 
 	block.world.rotate_ = { 0.0f,0.0f,0.0f };
-	block.world.scale_ = { 1.0f,1.0f,1.0f };
+	block.world.scale_ = { 0.0f,0.0f,0.0f };
 
 	block.color = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -171,6 +178,18 @@ void Field::CreateBlocks(const int x, const int z) {
 	block.massLocation = { (float)x,(float)z };
 
 	blocks_.push_back(block);
+}
+
+void Field::CreateStage() {
+	//各ブロックの生成
+	for (int i = 0; i < verticalSize_; i++) {
+		for (int j = 0; j < horizontalSize_; j++) {
+			CreateBlocks(i, j);
+		}
+	}
+
+	//限界値の設定
+	SetBlockHeightLimit(heightLimit_);
 }
 
 Vector2 Field::GetBlockAt(float x, float z) {
@@ -185,6 +204,55 @@ Vector2 Field::GetBlockAt(float x, float z) {
 	}
 
 	return Vector2{ -1,-1 };//見つからなければ適当な値
+}
+
+void Field::PlayStageIntroAnimation(float deltaTime) {
+	if (!isAnimationReset_) return;
+
+	elapsedTime_ += deltaTime;
+
+	bool allFinished = true;
+
+	for (Block& block : blocks_) {
+		Vector3& pos = block.world.translate_;
+		Vector3& rot = block.world.rotate_;
+		Vector3& scale = block.world.scale_;
+
+		//中心ブロックとの距離を使ってディレイを計算
+		float dx = pos.x - centerBlockPos_.x;
+		float dz = pos.z - centerBlockPos_.z;
+		float distanceFromCenter = std::sqrt(dx * dx + dz * dz);
+
+		float startDelay = distanceFromCenter * 0.2f;//距離に応じた遅延
+		float localTime = elapsedTime_ - startDelay;
+
+		if (localTime < 0.0f) {
+			allFinished = false;//まだ開始してないブロックあり
+			continue;
+		}
+
+		float animDuration = 1.0f;//各ブロックのアニメ時間
+		float t = min(localTime / animDuration, 1.0f);
+
+		//イージング（smoothstep風）
+		float easedT = t * t * (3.0f - 2.0f * t);
+
+		//回転：最終的に0に戻す（0 → 最大回転 → 0）
+		float angle = std::sin(easedT * 3.14159f) * 3.14159f;//πラジアン（180°）回転して戻る
+		rot = { 0.0f, angle, 0.0f };
+
+		//アニメーション適用
+		pos.y = -5.0f + easedT * 5.0f;
+		scale = { easedT, easedT, easedT };
+
+		if (t < 1.0f) {
+			allFinished = false;//このブロックはまだ完了してない
+		}
+	}
+
+	if (allFinished) {
+		isAnimationReset_ = false;//全ブロック完了で演出終了
+	}
 }
 
 void Field::RaiseBlocksAround(const Vector2& center, float radius, float deltaY) {
