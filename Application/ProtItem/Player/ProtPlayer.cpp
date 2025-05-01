@@ -39,7 +39,7 @@ ProtPlayer::ProtPlayer()
 	gvg->SetMonitorValue("ヒットフラグ", &parameters_.isHit);
 	gvg->SetMonitorValue("回避クールタイム", &parameters_.currentRollSec);
 	gvg->SetValue("体力", &parameters_.hp);
-
+	//コライダーツリーセット
 	gvg->SetTreeData(collider_->GetDebugTree());
 
 	//全ての状態のツリーをセット
@@ -49,6 +49,13 @@ ProtPlayer::ProtPlayer()
 		}
 	}
 
+	//ヒット時の処理パラメータ設定
+	GvariTree hitTree;
+	hitTree.name_ = "ヒット時";
+	hitTree.SetMonitorValue("ヒットフラグON", &parameters_.isHit);
+	hitTree.SetValue("無敵時間", &maxHitSec_);
+	hitTree.SetValue("点滅回数", &maxTenmetu_);
+	gvg->SetTreeData(hitTree);
 }
 
 void ProtPlayer::Update()
@@ -72,6 +79,9 @@ void ProtPlayer::Update()
 	//状態更新
 	behaviors_[(int)behaviorName_]->Update();
 
+	//点滅更新
+	Tenmetu();
+
 	//行列更新
 	GameObject::GameUpdate();
 
@@ -92,6 +102,12 @@ void ProtPlayer::SetWorldTranslate(const Vector3& translate)
 {
 	world_.translate_ = translate;
 	world_.UpdateMatrix();
+}
+
+void ProtPlayer::OnCollison()
+{
+	//ヒットフラグOFF
+	parameters_.isHit = false;
 }
 
 Vector3 ProtPlayer::SetBody2Input()
@@ -115,4 +131,36 @@ Vector3 ProtPlayer::SetBody2Input()
 	}
 
 	return velocity;
+}
+
+void ProtPlayer::Tenmetu()
+{
+	if (!parameters_.isHit) {
+
+		hitSec_ += (float)DeltaTimer::deltaTime_;
+
+		//時間内での点滅処理
+		if (hitSec_ >= (maxHitSec_/maxTenmetu_)*tenmetuCount_) {
+			tenmetuCount_++;
+
+			//透明度を変更
+			if (model_->materialData_->color.w == 1.0f) {
+				model_->materialData_->color.w = 0.1f;
+			}
+			else {
+				model_->materialData_->color.w = 1.0f;
+			}
+		}
+			
+		//時間経過で終了
+		if (hitSec_ >= maxHitSec_) {
+			parameters_.isHit = true;
+			model_->materialData_->color.w = 1.0f;
+
+			//カウント初期化
+			hitSec_ = 0;
+			//点滅回数初期化
+			tenmetuCount_ = 0;
+		}
+	}
 }

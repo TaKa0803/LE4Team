@@ -100,9 +100,6 @@
     <ClCompile Include="Engine\Camera\Camera.cpp">
       <Filter>Engine\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Debug\DebugScene.cpp">
-      <Filter>Application\DebugScene</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\base\DeltaTimer\DeltaTimer.cpp">
       <Filter>Engine\DeltaTimer</Filter>
     </ClCompile>
@@ -400,9 +397,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Camera\Camera.h">
       <Filter>Engine\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Debug\DebugScene.h">
-      <Filter>Application\DebugScene</Filter>
     </ClInclude>
     <ClInclude Include="Engine\base\DeltaTimer\DeltaTimer.h">
       <Filter>Engine\DeltaTimer</Filter>

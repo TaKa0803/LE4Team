@@ -2,7 +2,6 @@
 #include"IScene/IScene.h"
 
 #pragma region 各シーンクラス
-#include"Debug/DebugScene.h"
 #include"ProtItem/Scenes/ProtScene.h"
 #pragma endregion
 
@@ -23,8 +22,6 @@ public://**パブリック関数**//
 	static std::unique_ptr<IScene>CreateScene(SCENE scene) {
 		switch (scene)
 		{
-		case SCENE::Debug://デバッグシーンを返す処理
-			return std::make_unique<DebugScnene>();
 
 		case SCENE::Prot://デバッグシーンを返す処理
 			return std::make_unique<ProtScene>();

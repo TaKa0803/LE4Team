@@ -110,7 +110,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application\Debug\DebugScene.cpp" />
     <ClCompile Include="Application\AppScene\AppScene.cpp" />
     <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
     <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
@@ -390,7 +389,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application\Debug\DebugScene.h" />
     <ClInclude Include="Application\AppScene\AppScene.h" />
     <ClInclude Include="Application\Game\BaseManager\BaseManager.h" />
     <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />

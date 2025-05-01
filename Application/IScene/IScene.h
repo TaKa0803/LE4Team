@@ -3,7 +3,6 @@
 
 //シーン
 enum class SCENE {
-	Debug,
 	Prot,
 	SceneCount	//使うな
 };

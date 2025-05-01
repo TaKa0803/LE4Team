@@ -13,7 +13,7 @@ SceneManager::SceneManager(){}
 void SceneManager::Initialize()
 {
 	//初期シーン設定
-	IScene::SetScene(SCENE::Debug);
+	IScene::SetScene(SCENE::Prot);
 }
 
 void SceneManager::Update()

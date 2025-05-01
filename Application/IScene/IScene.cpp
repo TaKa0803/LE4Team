@@ -1,6 +1,6 @@
 #include"IScene/IScene.h"
 
-int IScene::sceneNo = (int)SCENE::Debug;
+int IScene::sceneNo = 0;
 
 bool IScene::leaveGame = false;
 

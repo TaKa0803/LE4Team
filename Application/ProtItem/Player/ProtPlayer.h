@@ -45,6 +45,12 @@ public://**パブリック変数**//
 	/// <param name="translate">セットする座標</param>
 	void SetWorldTranslate(const Vector3& translate);
 
+	/// <summary>
+	/// 当たり判定処理
+	/// </summary>
+	void OnCollison();
+
+
 public://**ゲッター**//
 
 	/// <summary>
@@ -60,6 +66,13 @@ public://**セッター
 	/// </summary>
 	/// <returns>向きベクトル</returns>
 	Vector3 SetBody2Input();
+
+private://**プライベート関数**//
+
+	/// <summary>
+	/// 点滅処理
+	/// </summary>
+	void Tenmetu();
 
 public://**状態**//
 
@@ -84,4 +97,18 @@ private://**プライベート変数**//
 	//当たり判定
 	std::unique_ptr<SphereCollider>collider_;
 
+
+private://**ヒット時処理*//
+	
+	//無敵時間カウント
+	float hitSec_ = 0;
+
+	//点メス回数カウント
+	int tenmetuCount_ = 0;
+
+	//無敵時間
+	float maxHitSec_ = 1.0f;
+
+	//点滅回数
+	int maxTenmetu_ = 3;
 };
