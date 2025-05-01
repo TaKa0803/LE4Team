@@ -12,7 +12,9 @@
 
 #include <list>
 #include <cassert>
-
+#include <algorithm>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include"Input/Input.h"
 
@@ -30,8 +32,8 @@ public:
 	void Draw();
 	void Finalize();
 
-	//ステージの生成
-	void CreateStage();
+	//ステージの開始
+	void StartStage();
 
 	//ステージの状態リセット
 	void ResetStage();
@@ -39,18 +41,17 @@ public:
 	//ステージの削除
 	void DeleteStage();
 
+	//ステージの生成
+	void CreateStage();
+
 	//各ブロックの高さの限界値を設定
 	void SetBlockHeightLimit(float heightLimit);
 
-	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
-	float GetMassLocationPosY(Vector3 translate);
-
-private:
-	//各ブロックの生成
-	void CreateBlocks(const int x, const int z);
-
 	//座標を基にブロック位置を取得する
 	Vector2 GetBlockAt(float x, float z);
+
+	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
+	float GetMassLocationPosY(Vector3 translate);
 
 	/// <summary>
 	/// 指定ブロックを中心に周囲の高さを変える(減衰なし)
@@ -67,6 +68,13 @@ private:
 	/// 第三引数:中心地点の下がる量
 	/// </summary>
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
+
+private:
+	//各ブロックの生成
+	void CreateBlocks(const int x, const int z);
+
+	//ステージの開始/リセット演出
+	void PlayStageIntroAnimation(float deltaTime);
 
 	//各ブロックの高さを限界値内に修正
 	void FixedHeightCorrection();
@@ -97,6 +105,11 @@ private:
 	static const int horizontalSize_ = 20;//横のブロック数
 	float blockWidth_ = 2.0f;//ブロック間隔
 	float prevBlockWidth_ = blockWidth_;//前フレームのブロック間隔
+
+	bool isAnimationReset_ = false;//リセット用のアニメーションフラグ
+	float elapsedTime_ = 0.0f;//アニメーション経過時間
+	float deltaTime_ = 0.0f;//フレーム時間間隔
+	float deltaPlusTime_ = 0.0f;//deltaTime_に加算する値設定用
 
 	//テスト用変数
 	Vector2 nowPos_ = { 0.0f,0.0f };//現在の指定位置
