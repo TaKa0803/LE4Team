@@ -3,6 +3,7 @@
 #include"ProtItem/Player/ProtPlayer.h"
 #include"ProtItem/Boss/Boss.h"
 #include"ProtItem/Field/Field.h"
+#include"ProtItem/FlowCamera/FlowCamera.h"
 
 class ProtScene : public IScene {
 
@@ -30,6 +31,9 @@ public://**パブリック関数**//
 	void Draw() override;
 
 private:
+
+	//カメラ
+	std::unique_ptr<FlowCamera>camera_ = nullptr;
 
 	//プレイヤー
 	std::unique_ptr<ProtPlayer> player_ = nullptr;

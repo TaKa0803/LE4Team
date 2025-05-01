@@ -5,6 +5,9 @@ ProtScene::ProtScene()
 {
 	//プレイヤーの生成
 	player_ = std::make_unique<ProtPlayer>();
+	
+	//カメラ制御のインスタンス生成
+	camera_ = std::make_unique<FlowCamera>(&player_->world_);
 
 	//ボスの生成
 	boss_ = std::make_unique<Boss>();
@@ -17,8 +20,8 @@ ProtScene::ProtScene()
 
 void ProtScene::Initialize()
 {
-
-	Camera::GetInstance()->Initialize();
+	//カメラ処理初期化
+	camera_->Init();
 
 	//ボスの初期化
 	boss_->Init();
@@ -31,7 +34,7 @@ void ProtScene::Update()
 {
 
 	//カメラ更新
-	Camera::GetInstance()->Update();
+	camera_->Update();
 
 	//プレイヤーの更新
 	player_->Update();
