@@ -4,6 +4,7 @@
 #include"SphereCollider/SphereCollider.h"
 #include"BossBullet/BossBullet.h"
 #include<optional>
+#include<string>
 
 //ボスクラス
 class Boss :public GameObject {
@@ -91,4 +92,16 @@ private://**パラメータ変数**//
 	float fallSpeed_ = 10.0f;
 
 	float radius_ = 1.0f;
+
+private://**デバッグ用変数**//
+	
+	//攻撃指定
+	std::string debugBehavior_="None";
+
+	std::vector<std::string> behaviorNames_ = {
+	"None",
+	"Idle",
+	"Attack1",
+	"Attack2"
+	};
 };

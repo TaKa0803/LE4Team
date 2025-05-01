@@ -24,7 +24,11 @@ Boss::Boss()
 
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("共通経過時間", &parameters_.currentSec);
-	
+
+	//デバッグ用指定
+	gvg->SetMonitorCombo("行動指定", &debugBehavior_,behaviorNames_);
+
+
 	gvg->SetTreeData(model_->SetDebugParam());
 	for (auto& behavior : behaviors_) {
 		if (!behavior)continue;
@@ -45,8 +49,31 @@ void Boss::Init()
 
 void Boss::Update()
 {
+
+
+
 	//リクエストがある場合
 	if (behaviorRequest_) {
+
+#ifdef _DEBUG
+		//デバッグ時の攻撃指定
+		if (debugBehavior_ == behaviorNames_[0]) {
+			//何もなし
+		}
+		else if (debugBehavior_ == behaviorNames_[1]) {
+			//待機
+			behaviorRequest_ = Behavior::Idle;
+		}
+		else if (debugBehavior_ == behaviorNames_[2]) {
+			//攻撃1
+			behaviorRequest_ = Behavior::Attack1;
+		}
+		else {
+			//攻撃2
+			behaviorRequest_ = Behavior::Attack2;
+		}
+#endif // _DEBUG
+
 		//リクエストの値を渡す
 		behavior_ = behaviorRequest_.value();
 		//リクエスト初期化
