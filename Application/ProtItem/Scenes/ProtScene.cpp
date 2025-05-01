@@ -1,4 +1,5 @@
 #include "ProtScene.h"
+#include"Camera/Camera.h"
 
 ProtScene::ProtScene()
 {
@@ -17,6 +18,8 @@ ProtScene::ProtScene()
 void ProtScene::Initialize()
 {
 
+	Camera::GetInstance()->Initialize();
+
 	//ボスの初期化
 	boss_->Init();
 
@@ -26,6 +29,10 @@ void ProtScene::Initialize()
 
 void ProtScene::Update()
 {
+
+	//カメラ更新
+	Camera::GetInstance()->Update();
+
 	//プレイヤーの更新
 	player_->Update();
 
@@ -45,6 +52,7 @@ void ProtScene::Update()
 	//地面の更新
 	field_->Update();
 	player_->world_.translate_.y = field_->GetMassLocationPosY(player_->world_.translate_);
+
 }
 
 void ProtScene::Draw()
