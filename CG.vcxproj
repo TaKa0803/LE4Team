@@ -111,22 +111,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application\AppScene\AppScene.cpp" />
-    <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
-    <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
-    <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
-    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
+    <ClCompile Include="Application\ProtItem\CircleShadow\CircleShadow.cpp" />
     <ClCompile Include="Application\Game\Plane\Plane.cpp" />
-    <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Kick\PlayerAttackKick.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\PlayerBaseAttack.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerBaseBehavior.cpp" />
-    <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Player.cpp" />
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
     <ClCompile Include="Application\Game\Transition\Transition.cpp" />
     <ClCompile Include="Application\ProtItem\Boss\Behavior\AreaAttack\BossAreaAttack.cpp" />
@@ -139,6 +125,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\ProtItem\Boss\DangerZone\DangerZone.cpp" />
     <ClCompile Include="Application\ProtItem\Field\Field.cpp" />
     <ClCompile Include="Application\ProtItem\FlowCamera\FlowCamera.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\AttackManager\PlayerAttackManager.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\Attacks\IPlayerAttack.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\IProtBehavior.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\Move\ProtPlayerMove.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\Roll\ProtPlayerRoll.cpp" />
@@ -393,23 +381,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="Application\AppScene\AppScene.h" />
     <ClInclude Include="Application\Game\BaseManager\BaseManager.h" />
-    <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
-    <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h" />
-    <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
-    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
+    <ClInclude Include="Application\ProtItem\CircleShadow\CircleShadow.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />
-    <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Kick\PlayerAttackKick.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\PlayerBaseAttack.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerBaseButtonManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h" />
-    <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h" />
-    <ClInclude Include="Application\Game\Player\Player.h" />
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
     <ClInclude Include="Application\Game\Transition\Transition.h" />
     <ClInclude Include="Application\IScene\IScene.h" />
@@ -423,6 +396,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\ProtItem\Boss\DangerZone\DangerZone.h" />
     <ClInclude Include="Application\ProtItem\Field\Field.h" />
     <ClInclude Include="Application\ProtItem\FlowCamera\FlowCamera.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\AttackManager\PlayerAttackManager.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\Attacks\IPlayerAttack.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\IProtBehavior.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Move\ProtPlayerMove.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Roll\ProtPlayerRoll.h" />

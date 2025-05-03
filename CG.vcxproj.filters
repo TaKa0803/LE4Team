@@ -319,53 +319,11 @@
     <ClCompile Include="Engine\GlobalVariable\Manager\GlobalVaribleManager.cpp">
       <Filter>Engine\GlobalVariable\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp">
+    <ClCompile Include="Application\ProtItem\CircleShadow\CircleShadow.cpp">
       <Filter>Application\Game\CircleShadow</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp">
-      <Filter>Application\Game\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp">
-      <Filter>Application\Game\FollowCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp">
-      <Filter>Application\Game\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Application\Game\Plane\Plane.cpp">
       <Filter>Application\Game\Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Player.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Kick\PlayerAttackKick.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\PlayerBaseAttack.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerBaseBehavior.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp">
-      <Filter>Application\Game\Player</Filter>
     </ClCompile>
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp">
       <Filter>Application\Game\Player</Filter>
@@ -389,6 +347,8 @@
     <ClCompile Include="Application\ProtItem\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
     <ClCompile Include="Application\ProtItem\FlowCamera\FlowCamera.cpp" />
     <ClCompile Include="Application\ProtItem\Boss\DangerZone\DangerZone.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\AttackManager\PlayerAttackManager.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\Attacks\IPlayerAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -640,56 +600,11 @@
     <ClInclude Include="Application\Game\BaseManager\BaseManager.h">
       <Filter>Application\Game\BaseManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h">
+    <ClInclude Include="Application\ProtItem\CircleShadow\CircleShadow.h">
       <Filter>Application\Game\CircleShadow</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h">
-      <Filter>Application\Game\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h">
-      <Filter>Application\Game\FollowCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Effect\Impact\Impact.h">
-      <Filter>Application\Game\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\Plane\Plane.h">
       <Filter>Application\Game\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Player.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Kick\PlayerAttackKick.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\PlayerBaseAttack.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerBaseButtonManager.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h">
-      <Filter>Application\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h">
       <Filter>Application\Game\Player</Filter>
@@ -713,6 +628,8 @@
     <ClInclude Include="Application\ProtItem\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
     <ClInclude Include="Application\ProtItem\FlowCamera\FlowCamera.h" />
     <ClInclude Include="Application\ProtItem\Boss\DangerZone\DangerZone.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\AttackManager\PlayerAttackManager.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\Attacks\IPlayerAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
