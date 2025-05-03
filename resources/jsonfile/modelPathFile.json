@@ -21,9 +21,8 @@
     "z+Plane": [ "SystemResources/normalZ+Plane", "normalZ+Plane.obj" ]
   },
   "InstancingmodelPathFile": {
-
     "FallEnemy": [ "Object", "player.gltf", 100000 ],
-
+    "DangerArea": [ "plane", "plane.obj", 20 ],
 
     "Wall": [ "Wall", "Wall.obj", 100 ],
 

@@ -388,6 +388,7 @@
     <ClCompile Include="Application\ProtItem\Boss\BossBullet\BossBullet.cpp" />
     <ClCompile Include="Application\ProtItem\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
     <ClCompile Include="Application\ProtItem\FlowCamera\FlowCamera.cpp" />
+    <ClCompile Include="Application\ProtItem\Boss\DangerZone\DangerZone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -711,6 +712,7 @@
     <ClInclude Include="Application\ProtItem\Boss\BossBullet\BossBullet.h" />
     <ClInclude Include="Application\ProtItem\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
     <ClInclude Include="Application\ProtItem\FlowCamera\FlowCamera.h" />
+    <ClInclude Include="Application\ProtItem\Boss\DangerZone\DangerZone.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

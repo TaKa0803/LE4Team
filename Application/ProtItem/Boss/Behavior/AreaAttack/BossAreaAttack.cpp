@@ -42,7 +42,7 @@ void BossAreaAttack::UpdateBehavior1()
 		currentNum_++;
 
 		//生成
-		boss_->SpawnBullet();
+		boss_->SpawnDangerZone();
 	}
 }
 

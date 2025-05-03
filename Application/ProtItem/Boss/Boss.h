@@ -3,6 +3,7 @@
 #include"ProtItem/Boss/Behavior/IBossBehavior.h"
 #include"SphereCollider/SphereCollider.h"
 #include"BossBullet/BossBullet.h"
+#include"ProtItem/Boss/DangerZone/DangerZone.h"
 #include<optional>
 #include<string>
 
@@ -42,9 +43,11 @@ public://**パブリック関数**//
 	void Draw();
 
 	/// <summary>
-	/// 弾の発射処理
+	/// 警告エリア生成
 	/// </summary>
-	void SpawnBullet();
+	void SpawnDangerZone();
+
+
 
 public://**セッター**//
 
@@ -58,6 +61,18 @@ public://ゲッター**//
 
 	//弾データ取得
 	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bullets_; }
+
+private://**プライベート関数**//
+
+	/// <summary>
+	/// 攻撃関連の更新
+	/// </summary>
+	void UpdateAttacks();
+
+	/// <summary>
+/// 弾の発射処理
+/// </summary>
+	void SpawnBullet(const Vector3& pos);
 
 public://**状態
 
@@ -80,6 +95,9 @@ private://**プライベート変数**//
 	//弾データ群
 	std::list<std::unique_ptr<BossBullet>>bullets_;
 
+	//警告エリア群
+	std::list<std::unique_ptr<DangerZone>>dangerZones_;
+
 	//プレイヤー座標
 	const EulerWorldTransform* playerWorld_=nullptr;
 
@@ -91,7 +109,14 @@ private://**パラメータ変数**//
 	//落下速度
 	float fallSpeed_ = 10.0f;
 
+	//弾半径
 	float radius_ = 1.0f;
+
+	//警告時間
+	float warningTime_ = 0.5f;
+
+	//警告円の高度誤差
+	float warningHeight_ = 0.5f;
 
 private://**デバッグ用変数**//
 	

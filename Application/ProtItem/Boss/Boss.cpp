@@ -37,6 +37,8 @@ Boss::Boss()
 
 	GvariTree bulletTree;
 	bulletTree.name_ = "落下弾関係";
+	bulletTree.SetValue("警告円の高度", &warningHeight_);
+	bulletTree.SetValue("警告時間", &warningTime_);
 	bulletTree.SetValue("生成高度", &bulletStartHeight_);
 	bulletTree.SetValue("落下速度", &fallSpeed_);
 	bulletTree.SetValue("半径", &radius_);
@@ -83,6 +85,7 @@ void Boss::Update()
 		behaviors_[(int)behavior_]->Init();
 	}
 
+	//カウント増加
 	parameters_.currentSec += (float)DeltaTimer::deltaTime_;
 
 	//状態更新
@@ -91,24 +94,21 @@ void Boss::Update()
 	//行列更新
 	GameObject::GameUpdate();
 
-	//弾の更新
-	for (auto& bullet : bullets_) {
-		bullet->Update();
-	}
+	//攻撃関連の更新
+	UpdateAttacks();
 
-	//不要な球の削除
-	bullets_.remove_if([](auto& bullet) {
-		if (bullet->GetDead()) {
-			return true;
-		}
-		else {
-			return false;
-		}});
+
+
 
 }
 
 void Boss::Draw()
 {
+	//警告エリア描画
+	for (auto& dangerZone : dangerZones_) {
+		dangerZone->Draw();
+	}
+
 	//弾描画
 	for (auto& bullet : bullets_) {
 		bullet->Draw();
@@ -118,11 +118,28 @@ void Boss::Draw()
 	GameObject::Draw();
 }
 
-void Boss::SpawnBullet()
+void Boss::SpawnDangerZone()
 {
 	//プレイヤー座標取得
 	Vector3 pos = playerWorld_->GetWorldTranslate();
 
+	//高さ設定
+	pos.y += warningHeight_;
+
+	DangerZoneParameters param;
+	param.centerPos = pos;
+	param.maxDeadSec = warningTime_;
+	param.maxRadius = radius_;
+
+	//生成
+	std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+	//追加
+	dangerZones_.emplace_back(std::move(dangerZone));
+}
+
+void Boss::SpawnBullet(const Vector3&position)
+{
+	Vector3 pos = position;
 	//指定値高くする
 	pos.y = bulletStartHeight_;
 
@@ -138,4 +155,36 @@ void Boss::SpawnBullet()
 
 	//配列に追加
 	bullets_.emplace_back(std::move(bullet));
+}
+
+void Boss::UpdateAttacks()
+{
+
+	for (auto& dangerZone : dangerZones_) {
+		dangerZone->Update();
+	}
+
+	//不要な警告エリアの削除
+	dangerZones_.remove_if([&](std::unique_ptr<DangerZone>& dangerZone) {
+		if (dangerZone->GetDead()) {
+			SpawnBullet(dangerZone->world_.GetWorldTranslate());
+			return true;
+		}
+		else {
+			return false;
+		}});
+
+	//弾の更新
+	for (auto& bullet : bullets_) {
+		bullet->Update();
+	}
+
+	//不要な球の削除
+	bullets_.remove_if([](auto& bullet) {
+		if (bullet->GetDead()) {
+			return true;
+		}
+		else {
+			return false;
+		}});
 }
