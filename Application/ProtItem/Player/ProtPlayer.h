@@ -80,6 +80,7 @@ public://**状態**//
 	enum class Behavior{
 		Move,	//移動
 		Roll,	//回避
+		Attack,	//攻撃
 		Count	//状態の数
 	}behaviorName_=Behavior::Move;
 

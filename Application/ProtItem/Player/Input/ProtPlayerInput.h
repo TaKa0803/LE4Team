@@ -8,6 +8,7 @@ public://**パブリック変数**//
 
 	enum Type {
 		Roll,
+		Attack,
 		Count
 	};
 
@@ -39,6 +40,12 @@ private://**プライベート関数**//
 	/// 回避入力関数
 	/// </summary>
 	bool RollInput();
+
+	/// <summary>
+	/// 攻撃入力関数
+	/// </summary>
+	/// <returns></returns>
+	bool AttackInput();
 
 private://**プライベート変数**//
 

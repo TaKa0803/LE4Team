@@ -28,4 +28,9 @@ void ProtPlayerMove::Update()
 		//状態リクエスト送信
 		player_->behaviorRequest_ = ProtPlayer::Behavior::Roll;
 	}
+	//もし攻撃入力があったら
+	else if (player_->GetInput()->GetInput(ProtPlayerInput::Type::Attack)) {
+		//攻撃リクエスト
+		player_->behaviorRequest_ = ProtPlayer::Behavior::Attack;
+	}
 }

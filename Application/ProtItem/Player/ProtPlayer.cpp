@@ -5,6 +5,7 @@
 #pragma region 状態クラス
 #include"ProtItem/Player/behavior/Move/ProtPlayerMove.h"
 #include"ProtItem/Player/behavior/Roll/ProtPlayerRoll.h"
+#include"ProtItem/Player/behavior/AttackManager/PlayerAttackManager.h"
 #pragma endregion
 
 #include<numbers>
@@ -33,7 +34,7 @@ ProtPlayer::ProtPlayer()
 	//生成
 	behaviors_[(size_t)Behavior::Move] = std::make_unique<ProtPlayerMove>();
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<ProtPlayerRoll>();
-
+	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
 
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
 	gvg->SetMonitorValue("ヒットフラグ", &parameters_.isHit);

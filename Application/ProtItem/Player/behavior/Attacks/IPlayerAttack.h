@@ -1,8 +1,10 @@
 #pragma once
 #include"ProtItem/Player/behavior/IProtBehavior.h"
+#include"ProtItem/Player/Input/ProtPlayerInput.h"
+#include<memory>
 #include<optional>
 
-class IPlayerAttack :private IProtBehavior {
+class IPlayerAttack :public IProtBehavior {
 
 public://**パブリック関数**//
 
@@ -22,7 +24,17 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update() override;
 
+	/// <summary>
+	/// 次の攻撃フラグ取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsNextAttack() { return isAttack_; }
 
+	/// <summary>
+	/// 終了フラグ取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsEnd() { return isEnd_; }
 public://**状態**//
 
 	/// <summary>
@@ -48,17 +60,31 @@ public://**状態**//
 
 private:
 
+
+	std::unique_ptr<ProtPlayerInput> input_ = nullptr;
+
+	enum Behavior {
+		PreliminaryAction,
+		Action,
+		RigorAction,
+		Count
+	};
+
 	//時間
 	float sec_ = 0;
 
-	//攻撃前時間
-	float waitSec_ = 0;
-	//攻撃時間
-	float actionSec_ = 0;
-	//攻撃後時間
-	float afterSec_ = 0;
+	//現在の最大時間
+	float nowMaxSecond_ = 0;
+
+	//それぞれの最大時間
+	float maxSeconds_[Count] = {1.0f};
 
 	//状態番号
 	int behavior_=0;
 
+	//終了フラグ
+	bool isEnd_ = false;
+
+	//次の攻撃フラグ
+	bool isAttack_ = false;
 };

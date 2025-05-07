@@ -27,6 +27,8 @@ bool ProtPlayerInput::GetInput(Type type)
 	{
 	case ProtPlayerInput::Roll:
 		return RollInput();
+	case ProtPlayerInput::Attack:
+		return AttackInput();
 	case ProtPlayerInput::Count:
 		break;
 	default:
@@ -47,6 +49,21 @@ bool ProtPlayerInput::RollInput()
 
 	//コントローラー入力チェック
 	ans += input_->IsTriggerButton(kButtonB);
+
+	//返却
+	return (bool)ans;
+}
+
+bool ProtPlayerInput::AttackInput()
+{
+	//入力チェック変数生成と初期化
+	int ans = 0;
+
+	//キー入力チェック
+	ans = input_->TriggerKey(DIK_SPACE);
+
+	//コントローラー入力チェック
+	ans += input_->IsTriggerButton(kButtonX);
 
 	//返却
 	return (bool)ans;

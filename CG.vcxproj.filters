@@ -349,6 +349,9 @@
     <ClCompile Include="Application\ProtItem\Boss\DangerZone\DangerZone.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\AttackManager\PlayerAttackManager.cpp" />
     <ClCompile Include="Application\ProtItem\Player\behavior\Attacks\IPlayerAttack.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\Attacks\Combo1\PlayerAttackCombo1.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.cpp" />
+    <ClCompile Include="Application\ProtItem\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -630,6 +633,9 @@
     <ClInclude Include="Application\ProtItem\Boss\DangerZone\DangerZone.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\AttackManager\PlayerAttackManager.h" />
     <ClInclude Include="Application\ProtItem\Player\behavior\Attacks\IPlayerAttack.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\Attacks\Combo1\PlayerAttackCombo1.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.h" />
+    <ClInclude Include="Application\ProtItem\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
